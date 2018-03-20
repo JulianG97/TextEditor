@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace TextEditor
 {
@@ -20,11 +21,6 @@ namespace TextEditor
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void helpToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
