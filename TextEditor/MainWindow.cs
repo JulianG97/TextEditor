@@ -52,18 +52,7 @@ namespace TextEditor
 
             if (askIfSave == DialogResult.Yes)
             {
-                try
-                {
-                    StreamWriter writer = new StreamWriter(fileName);
-                    writer.Write(this.richTextBox1.Text);
-                    writer.Close();
-
-                    this.textChanged = false;
-                }
-                catch
-                {
-                    MessageBox.Show("An error occured! The changes couldn't be saved!", "TextEditor", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
-                }
+                SaveFile(false);
             }
 
             if (askIfSave != DialogResult.Cancel)
@@ -107,33 +96,7 @@ namespace TextEditor
 
             if (askIfSave == DialogResult.Yes)
             {
-                if (fileName == "Untitled")
-                {
-                    if (this.saveFileDialog1.ShowDialog() == DialogResult.OK)
-                    {
-                        this.fileName = this.saveFileDialog1.FileName;
-                    }
-                    else
-                    {
-                        askIfSave = DialogResult.Cancel;
-                    }
-                }
-
-                if (askIfSave != DialogResult.Cancel)
-                {
-                    try
-                    {
-                        StreamWriter writer = new StreamWriter(fileName);
-                        writer.Write(this.richTextBox1.Text);
-                        writer.Close();
-
-                        this.textChanged = false;
-                    }
-                    catch
-                    {
-                        MessageBox.Show("An error occured! The changes couldn't be saved!", "TextEditor", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
-                    }
-                }
+                SaveFile(false);
             }
 
             if (askIfSave != DialogResult.Cancel)
@@ -143,6 +106,52 @@ namespace TextEditor
                 this.richTextBox1.Text = string.Empty;
                 this.textChanged = false;
             }
+        }
+
+        private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFile(false);
+        }
+
+        private void SaveFile(bool saveAs)
+        {
+            DialogResult askIfSave = DialogResult.None;
+
+            if (this.fileName == "Untitled" || saveAs == true)
+            {
+                if (this.saveFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    this.fileName = this.saveFileDialog1.FileName;
+                    this.Text = "TextEditor" + " - " + GetFileName(this.fileName);
+                }
+                else
+                {
+                    askIfSave = DialogResult.Cancel;
+                }
+            }
+
+            if (askIfSave != DialogResult.Cancel)
+            {
+                try
+                {
+                    StreamWriter writer = new StreamWriter(fileName);
+                    writer.Write(this.richTextBox1.Text);
+                    writer.Close();
+
+                    this.textChanged = false;
+                }
+                catch
+                {
+                    MessageBox.Show("An error occured! The changes couldn't be saved!", "TextEditor", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
+                }
+            }
+
+            this.saveFileDialog1.FileName = string.Empty;
+        }
+
+        private void SaveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFile(true);
         }
     }
 }
