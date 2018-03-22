@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,11 +28,6 @@ namespace TextEditor
         private void TextHasChanged(object sender, EventArgs e)
         {
             this.textChanged = true;
-        }
-
-        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
 
         private string GetFileName(string path)
@@ -76,13 +71,6 @@ namespace TextEditor
                     }
                 }
             }
-        }
-
-        private void PrintToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.printDialog1.AllowSomePages = true;
-            this.printDialog1.ShowHelp = true;
-            this.printDialog1.Document = new System.Drawing.Printing.PrintDocument();
         }
 
         private void NewToolStripMenuItem_Click(object sender, EventArgs e)
@@ -152,6 +140,31 @@ namespace TextEditor
         private void SaveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFile(true);
+        }
+
+        private void HelpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HelpWindow helpWindow = new HelpWindow();
+            helpWindow.Show();
+        }
+
+        private void MainWindow_Closing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult askIfSave = DialogResult.None;
+
+            if (this.textChanged == true)
+            {
+                askIfSave = MessageBox.Show("Do you want to save the changes?", "TextEditor", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+            }
+
+            if (askIfSave == DialogResult.Yes)
+            {
+                SaveFile(false);
+            }
+            else if (askIfSave == DialogResult.Cancel)
+            {
+                e.Cancel = true;
+            }
         }
     }
 }
