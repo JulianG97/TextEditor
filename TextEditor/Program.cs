@@ -16,7 +16,7 @@ namespace TextEditor
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Form1 mainWindow = new Form1();
+            MainWindow mainWindow = new MainWindow();
             Application.Run(mainWindow);
         }
     }
