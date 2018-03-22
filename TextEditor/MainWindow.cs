@@ -15,6 +15,7 @@ namespace TextEditor
     public partial class MainWindow : Form
     {
         private bool textChanged;
+        private string fileName;
 
         public MainWindow()
         {
@@ -34,9 +35,27 @@ namespace TextEditor
 
         private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            DialogResult askIfSave = DialogResult.None;
+
             if (this.textChanged == true)
             {
-                // Show Save Dialog
+                askIfSave = MessageBox.Show("Do you want to save the changes?", "TextEditor", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+            }
+
+            if (askIfSave == DialogResult.Yes)
+            {
+                try
+                {
+                    StreamWriter writer = new StreamWriter(fileName);
+                    writer.Write(this.richTextBox1.Text);
+                    writer.Close();
+
+                    this.textChanged = false;
+                }
+                catch
+                {
+                    MessageBox.Show("An error occured! The changes couldn't be saved!", "TextEditor", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
+                }
             }
 
             if (this.openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -46,12 +65,22 @@ namespace TextEditor
                     StreamReader reader = new StreamReader(this.openFileDialog1.FileName);
                     this.richTextBox1.Text = reader.ReadToEnd();
                     reader.Close();
+
+                    this.fileName = openFileDialog1.FileName;
+                    this.textChanged = false;
                 }
                 catch
                 {
-                    // Open Error Window
+                    MessageBox.Show("An error occured! The file couldn't be opened!", "TextEditor", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
                 }
             }
+        }
+
+        private void printToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.printDialog1.AllowSomePages = true;
+            this.printDialog1.ShowHelp = true;
+            this.printDialog1.Document = new System.Drawing.Printing.PrintDocument();
         }
     }
 }
