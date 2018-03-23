@@ -26,6 +26,19 @@ namespace TextEditor
             this.textChanged = false;
             this.fileName = "Untitled";
             this.Text = "TextEditor" + " - " + this.fileName;
+
+            this.CheckIfOpenFileAtStartUp();
+        }
+
+        private void CheckIfOpenFileAtStartUp()
+        {
+            string[] args = Environment.GetCommandLineArgs();
+
+            if (args != null && args.Length == 2)
+            {
+                this.fileName = args[1];
+                this.OpenFile();
+            }
         }
 
         private void MainWindow_KeyDown(object sender, System.Windows.Forms.KeyEventArgs k)
@@ -92,35 +105,40 @@ namespace TextEditor
             {
                 if (this.openFileDialog1.ShowDialog() == DialogResult.OK)
                 {
-                    try
-                    {
-                        this.fileName = openFileDialog1.FileName;
+                    this.fileName = openFileDialog1.FileName;
 
-                        if (CheckIfFileIsRtf(this.fileName) == true)
-                        {
-                            this.richTextBox1.LoadFile(this.fileName, RichTextBoxStreamType.RichText);
-
-                            this.richTextBox1.HideSelection = true;
-                            this.richTextBox1.SelectAll();
-                            this.richTextBox1.Font = this.richTextBox1.SelectionFont;
-                            this.richTextBox1.Select(this.richTextBox1.Text.Length, this.richTextBox1.Text.Length);
-                            this.richTextBox1.HideSelection = false;
-                            this.fontDialog1.Font = richTextBox1.Font;
-                        }
-                        else
-                        {
-                            this.richTextBox1.LoadFile(this.fileName, RichTextBoxStreamType.PlainText);
-                        }
-
-                        this.textChanged = false;
-                        this.Text = "TextEditor" + " - " + GetFileName(this.fileName);
-                        this.openFileDialog1.FileName = string.Empty;
-                    }
-                    catch
-                    {
-                        MessageBox.Show("An error occured! The file couldn't be opened!", "TextEditor", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
-                    }
+                    this.OpenFile();
                 }
+            }
+        }
+
+        private void OpenFile()
+        {
+            try
+            {
+                if (CheckIfFileIsRtf(this.fileName) == true)
+                {
+                    this.richTextBox1.LoadFile(this.fileName, RichTextBoxStreamType.RichText);
+
+                    this.richTextBox1.HideSelection = true;
+                    this.richTextBox1.SelectAll();
+                    this.richTextBox1.Font = this.richTextBox1.SelectionFont;
+                    this.richTextBox1.Select(this.richTextBox1.Text.Length, this.richTextBox1.Text.Length);
+                    this.richTextBox1.HideSelection = false;
+                    this.fontDialog1.Font = richTextBox1.Font;
+                }
+                else
+                {
+                    this.richTextBox1.LoadFile(this.fileName, RichTextBoxStreamType.PlainText);
+                }
+
+                this.textChanged = false;
+                this.Text = "TextEditor" + " - " + GetFileName(this.fileName);
+                this.openFileDialog1.FileName = string.Empty;
+            }
+            catch
+            {
+                MessageBox.Show("An error occured! The file couldn't be opened!", "TextEditor", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
             }
         }
 
