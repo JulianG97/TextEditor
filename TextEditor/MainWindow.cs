@@ -1,15 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing.Printing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Threading;
-using System.Windows.Input;
-using System.IO;
 
 namespace TextEditor
 {
@@ -41,9 +31,13 @@ namespace TextEditor
             }
         }
 
-        private void MainWindow_KeyDown(object sender, System.Windows.Forms.KeyEventArgs k)
+        private void MainWindow_KeyDown(object sender, KeyEventArgs k)
         {
-            if (k.Control)
+            if (k.Control && k.Shift && k.KeyCode == Keys.S)
+            {
+                this.SaveAsToolStripMenuItem_Click(this, new EventArgs());
+            }
+            else if (k.Control)
             {
                 if (k.KeyCode == Keys.N)
                 {
@@ -56,10 +50,6 @@ namespace TextEditor
                 else if (k.KeyCode == Keys.S)
                 {
                     this.SaveToolStripMenuItem_Click(this, new EventArgs());
-                }
-                else if (k.Shift && k.KeyCode == Keys.S)
-                {
-                    this.SaveAsToolStripMenuItem_Click(this, new EventArgs());
                 }
                 else if (k.KeyCode == Keys.F)
                 {
