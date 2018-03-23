@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
+using System.Windows.Input;
 using System.IO;
 
 namespace TextEditor
@@ -20,9 +21,46 @@ namespace TextEditor
         public MainWindow()
         {
             InitializeComponent();
+
+            this.KeyPreview = true;
             this.textChanged = false;
             this.fileName = "Untitled";
             this.Text = "TextEditor" + " - " + this.fileName;
+        }
+
+        private void MainWindow_KeyDown(object sender, System.Windows.Forms.KeyEventArgs k)
+        {
+            if (k.Control)
+            {
+                if (k.KeyCode == Keys.N)
+                {
+                    this.NewToolStripMenuItem_Click(this, new EventArgs());
+                }
+                else if (k.KeyCode == Keys.O)
+                {
+                    this.OpenToolStripMenuItem_Click(this, new EventArgs());
+                }
+                else if (k.KeyCode == Keys.S)
+                {
+                    this.SaveToolStripMenuItem_Click(this, new EventArgs());
+                }
+                else if (k.Shift && k.KeyCode == Keys.S)
+                {
+                    this.SaveAsToolStripMenuItem_Click(this, new EventArgs());
+                }
+                else if (k.KeyCode == Keys.F)
+                {
+                    this.FontSettingsToolStripMenuItem_Click(this, new EventArgs());
+                }
+                else if (k.KeyCode == Keys.H)
+                {
+                    this.HelpToolStripMenuItem_Click(this, new EventArgs());
+                }
+                else if (k.KeyCode == Keys.X)
+                {
+                    this.Close();
+                }
+            }
         }
 
         private void TextHasChanged(object sender, EventArgs e)
