@@ -174,10 +174,10 @@ namespace TextEditor
             SaveFile(true);
         }
 
-        private void HelpToolStripMenuItem_Click(object sender, EventArgs e)
+        private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            HelpWindow helpWindow = new HelpWindow();
-            helpWindow.Show();
+            AboutWindow aboutWindow = new AboutWindow();
+            aboutWindow.Show();
         }
 
         private void MainWindow_Closing(object sender, FormClosingEventArgs e)
@@ -205,6 +205,12 @@ namespace TextEditor
             {
                 this.richTextBox1.Font = fontDialog1.Font;
             }
+        }
+
+        private void HelpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HelpWindow helpWindow = new HelpWindow();
+            helpWindow.Show();
         }
     }
 }
