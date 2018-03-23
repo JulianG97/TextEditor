@@ -56,11 +56,24 @@ namespace TextEditor
                 {
                     try
                     {
-                        StreamReader reader = new StreamReader(this.openFileDialog1.FileName);
-                        this.richTextBox1.Text = reader.ReadToEnd();
-                        reader.Close();
-
                         this.fileName = openFileDialog1.FileName;
+
+                        if (CheckIfFileIsRtf(this.fileName) == true)
+                        {
+                            this.richTextBox1.LoadFile(this.fileName, RichTextBoxStreamType.RichText);
+
+                            this.richTextBox1.HideSelection = true;
+                            this.richTextBox1.SelectAll();
+                            this.richTextBox1.Font = this.richTextBox1.SelectionFont;
+                            this.richTextBox1.Select(this.richTextBox1.Text.Length, this.richTextBox1.Text.Length);
+                            this.richTextBox1.HideSelection = false;
+                            this.fontDialog1.Font = richTextBox1.Font;
+                        }
+                        else
+                        {
+                            this.richTextBox1.LoadFile(this.fileName, RichTextBoxStreamType.PlainText);
+                        }
+
                         this.textChanged = false;
                         this.Text = "TextEditor" + " - " + GetFileName(this.fileName);
                         this.openFileDialog1.FileName = string.Empty;
@@ -122,9 +135,14 @@ namespace TextEditor
             {
                 try
                 {
-                    StreamWriter writer = new StreamWriter(fileName);
-                    writer.Write(this.richTextBox1.Text);
-                    writer.Close();
+                    if (CheckIfFileIsRtf(this.fileName) == true)
+                    {
+                        this.richTextBox1.SaveFile(this.fileName, RichTextBoxStreamType.RichText);
+                    }
+                    else
+                    {
+                        this.richTextBox1.SaveFile(this.fileName, RichTextBoxStreamType.PlainText);
+                    }
 
                     this.textChanged = false;
                 }
@@ -135,6 +153,20 @@ namespace TextEditor
             }
 
             this.saveFileDialog1.FileName = string.Empty;
+        }
+
+        private bool CheckIfFileIsRtf(string path)
+        {
+            string[] pathArray = path.Split('.');
+
+            if (pathArray[pathArray.Length - 1] == "rtf")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private void SaveAsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -164,6 +196,14 @@ namespace TextEditor
             else if (askIfSave == DialogResult.Cancel)
             {
                 e.Cancel = true;
+            }
+        }
+
+        private void FontSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.fontDialog1.ShowDialog() == DialogResult.OK)
+            {
+                this.richTextBox1.Font = fontDialog1.Font;
             }
         }
     }
