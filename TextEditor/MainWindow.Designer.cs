@@ -120,12 +120,12 @@
             // 
             // openFileDialog1
             // 
-            this.openFileDialog1.Filter = "Text files (*.txt)|*.txt|Rich text file (*.rtf)|*.rtf|All files (*.*)|*.*";
+            this.openFileDialog1.Filter = "Text files (*.txt)|*.txt|Rich text format (*.rtf)|*.rtf|All files (*.*)|*.*";
             // 
             // saveFileDialog1
             // 
             this.saveFileDialog1.DefaultExt = "txt";
-            this.saveFileDialog1.Filter = "Text files (*.txt)|*.txt|Rich text file (*.rtf)|*.rtf|All files (*.*)|*.*";
+            this.saveFileDialog1.Filter = "Text files (*.txt)|*.txt|Rich text format (*.rtf)|*.rtf|All files (*.*)|*.*";
             // 
             // fontDialog1
             // 
