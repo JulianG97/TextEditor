@@ -1,7 +1,22 @@
-﻿namespace TextEditor
+﻿//-----------------------------------------------------------------------
+// <copyright file="HelpWindow.Designer.cs" company="Company">
+// Copyright (c) 2018 Julian and Patrick Gamauf. All rights reserved.
+// </copyright>
+// <summary>Represents the help window designer class.</summary>
+// <author>Julian and Patrick Gamauf</author>
+//-----------------------------------------------------------------------
+namespace TextEditor
 {
-    partial class HelpWindow
+    /// <summary>
+    /// Represents the help window designer class.
+    /// </summary>
+    public partial class HelpWindow
     {
+        /// <summary>
+        /// Shows a text box with the documentation.
+        /// </summary>
+        private System.Windows.Forms.RichTextBox richTextBox1;
+
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -10,13 +25,14 @@
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">True if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing && (this.components != null))
             {
-                components.Dispose();
+                this.components.Dispose();
             }
+
             base.Dispose(disposing);
         }
 
@@ -62,7 +78,5 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }

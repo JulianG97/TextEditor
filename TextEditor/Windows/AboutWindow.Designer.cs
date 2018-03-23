@@ -1,7 +1,47 @@
-﻿namespace TextEditor
+﻿//-----------------------------------------------------------------------
+// <copyright file="AboutWindow.Designer.cs" company="Company">
+// Copyright (c) 2018 Julian and Patrick Gamauf. All rights reserved.
+// </copyright>
+// <summary>Represents the about window designer class.</summary>
+// <author>Julian and Patrick Gamauf</author>
+//-----------------------------------------------------------------------
+namespace TextEditor
 {
-    partial class AboutWindow
+    /// <summary>
+    /// Represents the about window designer class.
+    /// </summary>
+    public partial class AboutWindow
     {
+        /// <summary>
+        /// Shows the icon of the program.
+        /// </summary>
+        private System.Windows.Forms.PictureBox pictureBox1;
+
+        /// <summary>
+        /// Shows the project name.
+        /// </summary>
+        private System.Windows.Forms.Label label1;
+
+        /// <summary>
+        /// Shows the copyright notice.
+        /// </summary>
+        private System.Windows.Forms.Label label2;
+
+        /// <summary>
+        /// Shows the project description.
+        /// </summary>
+        private System.Windows.Forms.Label label3;
+
+        /// <summary>
+        /// Shows the link of the project website.
+        /// </summary>
+        private System.Windows.Forms.LinkLabel linkLabel1;
+
+        /// <summary>
+        /// Shows the repository name where the project website is hosted.
+        /// </summary>
+        private System.Windows.Forms.Label label4;
+
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -10,13 +50,14 @@
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">True if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing && (this.components != null))
             {
-                components.Dispose();
+                this.components.Dispose();
             }
+
             base.Dispose(disposing);
         }
 
@@ -87,7 +128,7 @@
             this.linkLabel1.TabIndex = 4;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "https://github.com/JulianG97/TextEditor";
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel1_LinkClicked);
             // 
             // label4
             // 
@@ -124,12 +165,5 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.LinkLabel linkLabel1;
-        private System.Windows.Forms.Label label4;
     }
 }

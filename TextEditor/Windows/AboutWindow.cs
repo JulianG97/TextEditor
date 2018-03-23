@@ -1,24 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Diagnostics;
-
+﻿//-----------------------------------------------------------------------
+// <copyright file="AboutWindow.cs" company="Company">
+// Copyright (c) 2018 Julian and Patrick Gamauf. All rights reserved.
+// </copyright>
+// <summary>Represents the about window class.</summary>
+// <author>Julian and Patrick Gamauf</author>
+//-----------------------------------------------------------------------
 namespace TextEditor
 {
+    using System.Diagnostics;
+    using System.Windows.Forms;
+
+    /// <summary>
+    /// Represents the about window class.
+    /// </summary>
     public partial class AboutWindow : Form
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AboutWindow"/> class.
+        /// </summary>
         public AboutWindow()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        /// <summary>
+        /// Opens the website of the project.
+        /// </summary>
+        /// <param name="sender">The sender of the event.</param>
+        /// <param name="e">The event arguments.</param>
+        private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             try
             {

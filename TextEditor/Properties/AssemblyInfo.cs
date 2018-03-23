@@ -1,4 +1,11 @@
-﻿using System.Reflection;
+﻿//-----------------------------------------------------------------------
+// <copyright file="AssemblyInfo.cs" company="Company">
+// Copyright (c) 2018 Julian and Patrick Gamauf. All rights reserved.
+// </copyright>
+// <summary>Represents the assembly info class.</summary>
+// <author>Julian and Patrick Gamauf</author>
+//-----------------------------------------------------------------------
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
